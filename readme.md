@@ -1,3 +1,13 @@
+# Requirements
+
+Ubuntu 16.04
++ python3.6
++ apt install python3.6-dev
+
+Windows
+Cmake version > 3.5.1
+
+
 # Python Bindings for BL JPS algorithm
 
 Python bindings for using the BL_JPS algorithm. Requires CMake. To compile:
@@ -9,10 +19,17 @@ cmake ..
 cmake --build .
 ```
 
-This will generate a binary file in the `build` directory (`./lib/` for Linux and `./Debug/`/`./Release` for MSVC).
+Windows may require specific 64 bit instruction for visual studio such as
 
-You will also need the python development files. On Ubuntu, run
-`sudo apt-get install python3.6-dev`
+```
+mkdir build
+cd build
+cmake .. -G"Visual Studio 15 2017 Win64" -DCMAKE_BUILD_TYPE=Release
+cmake --build . --config Release
+```
+
+
+This will generate a binary file in the `build` directory (`./lib/` for Linux and `./Debug/`/`./Release` for MSVC).
 
 To run, copy the `.a/.so` (Linux) or `.pyd` (Windows) file to project and import with
 `import BL_JPS`
