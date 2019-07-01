@@ -11,6 +11,9 @@ cmake --build .
 
 This will generate a binary file in the `build` directory (`./lib/` for Linux and `./Debug/`/`./Release` for MSVC).
 
+You will also need the python development files. On Ubuntu, run
+`sudo apt-get install python3.6-dev`
+
 To run, copy the `.a/.so` (Linux) or `.pyd` (Windows) file to project and import with
 `import BL_JPS`
 
