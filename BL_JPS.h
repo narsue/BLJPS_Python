@@ -278,8 +278,29 @@ class BL_JPS: public  PathFindingAlgorithm
 
 			fclose(fp);
 		}
-		void preProcessGrid()
+		void preProcessGrid(vector<int> grid, int width, int height)
 		{
+			// We need a new sized test grid to match the new map size
+			if (testedGrid && width*height!=gridWidth*gridHeight)
+			{
+				delete [] testedGrid;
+				testedGrid = 0;
+			}
+
+			gridWidth=width;
+			gridHeight=height;
+			int len = (gridWidth * gridHeight);
+
+			testedGrid = new char[gridWidth*gridHeight/8+1];
+			if (grid.size() < len)
+			{
+				printf("Error grid data (%d) to small to fill map size %dx%d=%d\n",grid.size(),width,height,len);
+				return;
+			}
+			gridData.resize(len);
+			for (int i = 0; i < width * height; ++i)
+				gridData[i] = grid[i]==0;
+
 			preprocessedData=true;
 			for (int y =0;y<gridHeight;y++)
 			{
@@ -340,39 +361,21 @@ class BL_JPS: public  PathFindingAlgorithm
 		{
 			return gridHeight;
 		}
-		BL_JPS(vector<int> grid, int width, int height) : PathFindingAlgorithm(BLJPS_ALG_NAME, AT_BL_JPS)
+		BL_JPS() : PathFindingAlgorithm(BLJPS_ALG_NAME, AT_BL_JPS)
 		{
-			gridWidth=width;
-			gridHeight=height;
-#ifdef USE_OPENLIST2
-			testedGrid=new char[gridWidth*gridHeight/4+1];
-			parents = new int[gridWidth*gridHeight];
-			costs	= new float[gridWidth*gridHeight];
-			generated = new unsigned short[gridWidth*gridHeight];
-			memset(generated, 0, gridWidth*gridHeight * 2);
-			search=1;	
-#else
-			testedGrid=new char[gridWidth*gridHeight/8+1];
-#endif
-			int len = (gridWidth * gridHeight);// / 8 + 1;
-			if (grid.size() < len)
-			{
-				printf("Error grid data (%d) to small to fill map size %dx%d=%d\n",grid.size(),width,height,len);
-				return;
-			}
-			gridData.resize(len);
-			for (int i = 0; i < width * height; ++i) {
-				gridData[i] = grid[i]==0;
-			}
+			// gridWidth=width;
+			// gridHeight=height;
+
+// 			testedGrid=new char[gridWidth*gridHeight/8+1];
+
+			testedGrid = 0;
+
+			
 		}
 		~BL_JPS()
 		{
-			delete [] testedGrid;
-#ifdef USE_OPENLIST2
-			delete[] parents;
-			delete[] costs;
-			delete[]generated;
-#endif
+			if (testedGrid)
+				delete [] testedGrid;
 		}
 		unsigned char naturalNeighbours(const int dir)
 		{

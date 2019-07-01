@@ -22,9 +22,9 @@ origin = (3,2)
 dest = (63,63)
 
 # BLJPS algorithm
-bljps = BL_JPS.BL_JPS(map_data, width=map_width, height=map_height)
+bljps = BL_JPS.BL_JPS()
 start = datetime.now()
-bljps.preProcessGrid()
+bljps.preProcessGrid(map_data, width=map_width, height=map_height)
 for trial in range(100):
 	bljps_path = bljps.findSolution(origin[0], origin[1], dest[0], dest[1])
 print ('BL_JPS runtime Seconds:',(datetime.now()-start).total_seconds())

@@ -11,9 +11,11 @@ PYBIND11_MODULE(BL_JPS, m) {
 	m.doc() = "Python bindings for the C++ implementation of BL_JPS";
 
 	py::class_<BL_JPS>(m, "BL_JPS")
-		.def(py::init<vector<int>, int, int>(), "Construct a pathfinder", "grid"_a, "width"_a, "height"_a)
+		.def(py::init<>(), "Construct a pathfinder")
 		.def("flushReProcess", &BL_JPS::flushReProcess, "")
-		.def("preProcessGrid", &BL_JPS::preProcessGrid, "")
+		.def("preProcessGrid", &BL_JPS::preProcessGrid, "", "grid"_a, "width"_a, "height"_a)
+		.def("reProcessGrid", &BL_JPS::reProcessGrid, "", "lx"_a, "rx"_a, "ty"_a, "by"_a)
+
 		.def("findSolution", &BL_JPS::findSolution, "", "sX"_a, "sY"_a, "eX"_a, "eY"_a);
 
 	py::class_<Coordinate>(m, "Coordinate")
