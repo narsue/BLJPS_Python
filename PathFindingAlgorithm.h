@@ -16,15 +16,16 @@ enum AlgorithmType
 class PathFindingAlgorithm
 {
 	private:
-		char * algorithmName;
+		string algorithmName;
 		AlgorithmType algorithmType;
 	protected:
-
+		bool preprocessedData;
 	public:
-		PathFindingAlgorithm(char * _algorithmName,AlgorithmType id)
+		PathFindingAlgorithm(string  _algorithmName,AlgorithmType id)
 		{
 			algorithmName=_algorithmName;
 			algorithmType=id;
+			preprocessedData=false;
 		}
 		virtual ~PathFindingAlgorithm()
 		{
@@ -46,7 +47,7 @@ class PathFindingAlgorithm
 		virtual void useBackupData()=0;
 		virtual vector<Coordinate> findSolution(int sX,int sY,int _eX,int _eY)=0;
 		virtual bool isCoordinateBlocked(const Coordinate &c)=0;
-		char * getAlgorithmName()
+		string getAlgorithmName()
 		{
 			return algorithmName;
 		}
