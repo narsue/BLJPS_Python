@@ -301,6 +301,9 @@ class BL_JPS: public  PathFindingAlgorithm
 			for (int i = 0; i < width * height; ++i)
 				gridData[i] = grid[i]==0;
 
+			xBoundaryPoints.clear();
+			yBoundaryPoints.clear();
+			
 			preprocessedData=true;
 			for (int y =0;y<gridHeight;y++)
 			{
@@ -436,6 +439,7 @@ class BL_JPS: public  PathFindingAlgorithm
 			//Keep iterating over openlist until a solution is found or list is empty
 			while (openListBh.Count())
 			{
+				// printf("Coun:%d\n", openListBh.Count());
 				Node* currentNode = openListBh.PopMax();
 				unsigned char dirs = forcedNeighbours(currentNode->pos, currentNode->dir) | naturalNeighbours(currentNode->dir);
 				{
