@@ -41,8 +41,8 @@ To run, copy the `.a/.so` (Linux) or `.pyd` (Windows) file to project and import
 import BL_JPS
 
 map_data = [0, 0, 0, 1]
-bljps = BL_JPS.BL_JPS(map_data, width=2, height=2)
-bljps.preProcessGrid()
+bljps = BL_JPS.BL_JPS()
+bljps.preProcessGrid(map_data, width=2, height=2)
 path = bljps.findSolution(sX=0, sY=0, eX=1, eY=0)
 ```
 Note that the path is in revers ordr (i.e. `path[0] = eX,eY`, if reachable)
