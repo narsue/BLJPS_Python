@@ -15,8 +15,8 @@ Python bindings for using the BL_JPS algorithm. Requires CMake. To compile:
 ```
 mkdir build
 cd build
-cmake ..
-cmake --build .
+cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake --build . --config Release
 ```
 
 Windows may require specific 64 bit instruction for visual studio such as
